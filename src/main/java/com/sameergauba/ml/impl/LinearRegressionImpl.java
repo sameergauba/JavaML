@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jblas.DoubleMatrix;
+import org.jblas.MatrixFunctions;
 
 import com.sameergauba.ml.LinearRegression;
 
@@ -17,6 +18,7 @@ public class LinearRegressionImpl implements LinearRegression{
 	public DoubleMatrix train(double[][] X, double[] y) {
 		
 		DoubleMatrix xMatrix = new DoubleMatrix(X);
+		//xMatrix = MachineLearningUtil.normalizeFeatures(xMatrix);
 	    DoubleMatrix yMatrix = new DoubleMatrix(y);
 	    int xMatrixRows = xMatrix.getRows();
 	    
@@ -24,11 +26,11 @@ public class LinearRegressionImpl implements LinearRegression{
 	    xMatrix = DoubleMatrix.concatHorizontally(allOnes, xMatrix);
 	    
 	    theta = DoubleMatrix.zeros(xMatrix.columns);
-	    costFunctionValues = new ArrayList<Double>();
+	    costFunctionValues = new ArrayList<>();
 	    for(long i=0; i<iterationsForGradientDescend; i++){
 	    	DoubleMatrix J = xMatrix.mmul(theta).sub(yMatrix);
 	    	
-	    	costFunctionValues.add(J.sum());
+	    	costFunctionValues.add(MatrixFunctions.pow(J, 2).sum());
 	    	DoubleMatrix newX = xMatrix.transpose().mmul(J);
 	    	newX = newX.mul(alpha/xMatrix.rows);
 	    	theta = theta.sub(newX);

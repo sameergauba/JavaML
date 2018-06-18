@@ -1,11 +1,10 @@
 package com.sameergauba.ml.impl;
 
-import java.util.List;
-
+import com.sameergauba.ml.LogisticRegression;
 import org.jblas.DoubleMatrix;
 import org.jblas.MatrixFunctions;
 
-import com.sameergauba.ml.LogisticRegression;
+import java.util.List;
 
 public class LogisticRegressionImpl implements LogisticRegression{
 	
