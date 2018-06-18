@@ -1,0 +1,17 @@
+
+alpha = 0.01;
+num_iters = 7000;
+
+m = length(y);
+X = [ones(m, 1) X];
+n = size(X,2);
+
+theta = zeros(n, 1);
+[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+price = Xval * theta; 
+
+X
+theta
+price
+
